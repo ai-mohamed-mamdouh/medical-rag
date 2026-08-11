@@ -1,8 +1,9 @@
 import re
 from langchain_core.documents import Document
+
 class CleanDocuments :
     
-    def clean_documents(documents: list[Document]) -> list[Document]:
+    def clean_documents(self, documents: list[Document]) -> list[Document]:
         """Make Simple Clean For Documents"""
         for doc in documents:
             text = doc.page_content
