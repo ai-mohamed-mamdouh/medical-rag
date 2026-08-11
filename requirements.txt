@@ -2,6 +2,7 @@ langchain
 langchain-community
 langchain-groq
 langchain-text-splitters
+langchain-pymupdf4llm
 
 pymupdf4llm
 unstructured
