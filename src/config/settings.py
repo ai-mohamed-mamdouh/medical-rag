@@ -9,9 +9,13 @@ class Settings:
 
     DATA_DIR = BASE_DIR / "docs"
 
+    # GROQ_API_KEY = os.getenv("OPENAI_API_KEY")
+
     CHUNK_SIZE = 1000
     CHUNK_OVERLAP = 200
 
-    # OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+    EMBEDDING_MODEL_NAME="sentence-transformers/all-MiniLM-L6-v2"
+    GROQ_MODEL_NAME=''
+
 
 settings = Settings()

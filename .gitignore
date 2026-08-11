@@ -2,6 +2,7 @@
 docs
 src/generation
 src/retriever
+chroma_db
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

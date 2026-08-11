@@ -1,8 +1,12 @@
 langchain
 langchain-community
+langchain-huggingface 
+langchain-chroma
 langchain-groq
 langchain-text-splitters
 langchain-pymupdf4llm
+
+sentence-transformers
 
 pymupdf4llm
 unstructured
