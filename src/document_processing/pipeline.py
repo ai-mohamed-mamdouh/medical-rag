@@ -6,15 +6,15 @@
 
 from src.document_processing.loader import load_data , PDFLoader
 from src.document_processing.cleaner import CleanDocuments
-from src.document_processing.splitter import splite_document, RecursiveSplitter
 from src.document_processing.vector_store import VectorStore
+from src.document_processing.splitter import splite_document, RecursiveSplitter
 
-def file_process(path : str) :
+def process_document_pipeline(path : str, embedding_model) :
     documnets = load_data( PDFLoader( path ) )
     documnets = CleanDocuments().clean_documents(documnets)
 
     chunks = splite_document( RecursiveSplitter(documents=documnets) )
 
-    ids = VectorStore().add_chunks(chunks)
+    ids = VectorStore(embedding_model=embedding_model).add_chunks(chunks)
 
-    return ids
+    return 'load - clean - split - save in vectorStore'

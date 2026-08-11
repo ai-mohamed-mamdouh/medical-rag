@@ -3,7 +3,7 @@ docs
 src/generation
 src/retriever
 chroma_db
-
+temp
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]

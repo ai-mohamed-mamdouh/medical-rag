@@ -3,8 +3,8 @@ from langchain_core.documents import Document
 from src.document_processing.embeddings import get_embedding_model
 
 class VectorStore:
-    def __init__(self):
-        self.embedding_model = get_embedding_model()
+    def __init__(self, embedding_model):
+        self.embedding_model = embedding_model
         self.vector_store = self.get_vector_store()
 
     def get_vector_store(self) -> Chroma:
