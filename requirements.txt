@@ -1,0 +1,10 @@
+langchain
+langchain-community
+langchain-groq
+langchain-text-splitters
+
+pymupdf4llm
+unstructured
+
+python-dotenv
+chromadb
