@@ -1,6 +1,5 @@
 from langchain_chroma import Chroma
 from langchain_core.documents import Document
-from src.document_processing.embeddings import get_embedding_model
 
 class VectorStore:
     def __init__(self, embedding_model):

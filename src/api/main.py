@@ -1,12 +1,12 @@
 from fastapi import FastAPI
 from contextlib import asynccontextmanager
 from src.api.routes.document_processing import process_document_router
-from src.document_processing.embeddings import get_embedding_model
+from src.document_processing.embeddings import Embedding
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # Runs once when server starts
-    app.state.embedding_model = get_embedding_model()
+    app.state.embedding_model = Embedding().get_embedding_model()
 
     yield
 

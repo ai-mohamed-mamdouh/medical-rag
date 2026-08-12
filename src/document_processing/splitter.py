@@ -28,7 +28,9 @@ class RecursiveSplitter (BaseSplitter) :
     def splite(self) -> list[Document]:
         splitter = RecursiveCharacterTextSplitter(
             chunk_size=settings.CHUNK_SIZE,
-            chunk_overlap=settings.CHUNK_OVERLAP)
+            chunk_overlap=settings.CHUNK_OVERLAP,
+            separators=['\n\n' ,'\n' , ' ' , '']
+            )
 
         return splitter.split_documents(self.documents) # List of chunks 
 

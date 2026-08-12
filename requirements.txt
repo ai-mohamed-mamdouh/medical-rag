@@ -5,6 +5,7 @@ langchain-chroma
 langchain-groq
 langchain-text-splitters
 langchain-pymupdf4llm
+langchain-docling docling
 
 sentence-transformers
 fastapi
