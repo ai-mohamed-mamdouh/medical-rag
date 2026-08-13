@@ -12,7 +12,7 @@ fastapi
 python-multipart
 pymupdf4llm
 unstructured
-
+rank_bm25
 python-dotenv
 chromadb
 

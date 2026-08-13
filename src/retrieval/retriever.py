@@ -1,0 +1,66 @@
+from src.retrieval.query import Query
+from src.config.settings import settings
+from langchain_core.documents import Document
+from src.document_processing.vector_store import VectorStore
+from src.retrieval.retrievers.bm25_retriever import Bm25Retriever
+from src.retrieval.retrievers.vector_retriever import VectorRetriever
+from src.retrieval.retrievers.hybrid_retriever import HybridRetriever
+
+class Retriever:
+
+    def __init__(self, vector_store: VectorStore):
+        self.vector_store = vector_store
+
+        self.vector_retriever = VectorRetriever(
+            vector_store=self.vector_store
+        )
+
+        self.bm25_retriever = Bm25Retriever(
+            vector_store=self.vector_store
+        )
+
+        self.hybrid_retriever = HybridRetriever(
+            vector_retriever=self.vector_retriever,
+            bm25_retriever=self.bm25_retriever,
+            top_k=settings.TOP_K
+        )
+
+    def retrieval_pipeline(self, query: Query) -> list[Document]:
+        query = Query.normalized_query
+
+        docs = self.hybrid_retriever.retrieve(
+            query=query
+        )
+
+        return docs
+
+
+from src.document_processing.vector_store import VectorStore
+from src.document_processing.embeddings import Embedding
+from src.retrieval.retriever import Retriever
+
+
+if __name__ == "__main__":
+
+    # Vector Store is already created
+    vector_store = VectorStore(
+        Embedding().get_embedding_model()
+    )
+
+    # Pass it to the retrieval pipeline
+    retriever = Retriever(
+        vector_store=vector_store
+    )
+    query = Query(
+        original_query="What are the common peripheral and central causes of vertigo and dizziness?", 
+        normalized_query="What are the common peripheral and central causes of vertigo and dizziness?")
+    
+    docs = retriever.retrieval_pipeline(
+        query=Query
+    )
+
+    for i, doc in enumerate(docs, start=1):
+        print(f"Rank: {i}")
+        print(doc.page_content)
+        print(doc.metadata)
+        print("=" * 50)
