@@ -56,17 +56,3 @@ class QueryProcessor:
         query.normalized_query = text
 
         return query
-
-
-if __name__ == '__main__' :
-
-    query = Query(
-        original_query="   what is metformin dose???   for t2dm  "
-    )
-
-    processor = QueryProcessor()
-    query = processor.normalize_query(query)
-    print('=============================== ')
-    print(query.original_query)
-    print(query.normalized_query)
-    print('=============================== ')

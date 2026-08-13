@@ -28,15 +28,17 @@ def upload_document(
     file: UploadFile = File(...),
 ) -> UploadResponse:
     temp_path: str | None = None
+    vector_store = request.app.state.vector_store
 
     try:
         validate_file(file)
 
         temp_path = FileHelper.save_temp_file(file)
 
+        
         message = DocumentProcessor().document_processing_pipeline(
             path=temp_path,
-            embedding_model=request.app.state.embedding_model,
+            vector_store=vector_store
         )
 
         return UploadResponse(message=message)

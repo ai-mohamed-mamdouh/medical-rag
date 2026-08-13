@@ -6,6 +6,7 @@ from src.retrieval.retrievers.bm25_retriever import Bm25Retriever
 from src.retrieval.retrievers.vector_retriever import VectorRetriever
 from src.retrieval.retrievers.hybrid_retriever import HybridRetriever
 
+
 class Retriever:
 
     def __init__(self, vector_store: VectorStore):
@@ -25,38 +26,52 @@ class Retriever:
             top_k=settings.TOP_K
         )
 
-    def retrieval_pipeline(self, query: Query) -> list[Document]:
-        query = Query.normalized_query
+    def retrieval_pipeline(
+        self,
+        query: Query
+    ) -> list[Document]:
+
+        normalized_query = query.normalized_query
 
         docs = self.hybrid_retriever.retrieve(
-            query=query
+            query=normalized_query
         )
 
         return docs
 
 
+
+
+
 from src.document_processing.vector_store import VectorStore
 from src.document_processing.embeddings import Embedding
 from src.retrieval.retriever import Retriever
+from src.retrieval.query import Query
 
 
 if __name__ == "__main__":
 
-    # Vector Store is already created
     vector_store = VectorStore(
         Embedding().get_embedding_model()
     )
 
-    # Pass it to the retrieval pipeline
     retriever = Retriever(
         vector_store=vector_store
     )
+
     query = Query(
-        original_query="What are the common peripheral and central causes of vertigo and dizziness?", 
-        normalized_query="What are the common peripheral and central causes of vertigo and dizziness?")
-    
+        original_query=(
+            "What are the common peripheral and central causes "
+            "of vertigo and dizziness?"
+        ),
+        normalized_query=(
+            "What are the common peripheral and central causes "
+            "of vertigo and dizziness?"
+        )
+    )
+
     docs = retriever.retrieval_pipeline(
-        query=Query
+        query=query
     )
 
     for i, doc in enumerate(docs, start=1):

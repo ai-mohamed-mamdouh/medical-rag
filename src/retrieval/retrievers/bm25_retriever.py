@@ -68,34 +68,3 @@ class Bm25Retriever:
 
     def get_bm25_retriever(self):
         return self.bm25_retriever
-
-
-if __name__ == "__main__":
-
-    vector_store = VectorStore(
-        Embedding().get_embedding_model()
-    )
-
-    bm25_retriever = Bm25Retriever(
-        vector_store=vector_store
-    )
-
-    docs = bm25_retriever.retrieve(
-        "What are the common peripheral and central causes of vertigo and dizziness?"
-    )
-
-    print(len(docs))
-    print("================================")
-
-    for doc in docs:
-
-        print("==========content==============")
-        print(doc.page_content)
-
-        print("==========BM25 Score===========")
-        print(doc.metadata["bm25_score"])
-
-        print("==========metadata=============")
-        print(doc.metadata)
-
-        print("================================")

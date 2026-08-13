@@ -68,7 +68,7 @@ class DocumentProcessor :
 
         return result
 
-    def document_processing_pipeline(self, path : str, embedding_model) :
+    def document_processing_pipeline(self, path : str, vector_store:VectorStore ) :
         documents = DocumentLoader().load_data(PDFLoader(path=path))
         clean_documents = DocumentCleaner().clean_documents(documents=documents)
         sections = DocumentSplitter().split_documents_by_headings(clean_documents)
@@ -77,7 +77,6 @@ class DocumentProcessor :
         chunks = self.enrich_documents(chunks) 
         final_chunks = self.deduplicate_documents(chunks)
 
-        vector_store = VectorStore(embedding_model=embedding_model)
         ids = vector_store.generate_chunks_ids(final_chunks)
         ids = vector_store.add_new_documents(vector_store=vector_store.get_vector_store(), chunks=final_chunks, ids=ids)
 

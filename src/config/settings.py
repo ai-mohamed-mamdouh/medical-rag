@@ -21,6 +21,6 @@ class Settings:
     COLLECTION_NAME="medical_giddiness"
 
     TOP_K=4
-    RRF_K=100
+    RRF_K=60
 
 settings = Settings()

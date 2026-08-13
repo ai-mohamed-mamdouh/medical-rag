@@ -20,29 +20,3 @@ class VectorRetriever:
             documents.append(doc)
 
         return documents
-
-
-if __name__ == "__main__":
-    vector_store = VectorStore(
-        Embedding().get_embedding_model()
-    )
-
-    vector_retriever = VectorRetriever(
-        vector_store=vector_store
-    )
-
-    docs = vector_retriever.retrieve(
-        "What are the common peripheral and central causes of vertigo and dizziness?"
-    )
-
-    print(len(docs))
-    print("================================")
-
-    for doc in docs:
-        print("==========content==============")
-        print(doc.page_content)
-
-        print("==========metadata=============")
-        print(doc.metadata)
-
-        print("================================")

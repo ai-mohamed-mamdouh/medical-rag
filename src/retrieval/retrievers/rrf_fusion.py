@@ -1,11 +1,12 @@
 import hashlib
 from collections import defaultdict
 from langchain_core.documents import Document
+from src.config.settings import settings
 
 
 class RRFFusion:
 
-    def __init__(self, rrf_k: int = 60):
+    def __init__(self, rrf_k: int = settings.RRF_K):
         self.rrf_k = rrf_k
 
     def fuse(
