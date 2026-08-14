@@ -1,6 +1,7 @@
 from langchain_core.documents import Document
 from src.retrieval.retrievers.rrf_fusion import RRFFusion
 from src.config.settings import settings
+from src.retrieval.query import Query
 
 
 class HybridRetriever:
@@ -20,8 +21,8 @@ class HybridRetriever:
             rrf_k=rrf_k
         )
 
-    def retrieve(self, query: str) -> list[Document]:
-
+    def retrieve(self, query: Query) -> list[Document]:
+        query = query.normalized_query
         # 1. Vector retrieval
         vector_docs = self.vector_retriever.retrieve(query)
 

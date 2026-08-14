@@ -4,6 +4,7 @@ import logging
 from fastapi import FastAPI
 
 from src.api.routes.document_processing import document_processing_router
+from src.api.routes.retrieval_router import retrieval_router
 from src.document_processing.embeddings import Embedding
 from src.document_processing.vector_store import VectorStore
 from src.retrieval.reranker import RerankerModel
@@ -35,6 +36,7 @@ app = FastAPI(
 
 
 app.include_router(document_processing_router)
+app.include_router(retrieval_router)
 
 
 @app.get("/", tags=["Health"])

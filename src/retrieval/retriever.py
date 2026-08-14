@@ -1,4 +1,4 @@
-from src.retrieval.query import Query
+from src.retrieval.query import Query, QueryProcessor
 from src.config.settings import settings
 from langchain_core.documents import Document
 from src.document_processing.vector_store import VectorStore
@@ -38,11 +38,10 @@ class Retriever:
         return relevant_docs
         
     def retrieval_pipeline(self, query: Query, reRanker_model ) -> list[Document]:
-
-        normalized_query = query.normalized_query
+        query = QueryProcessor().normalize_query(query=query)
 
         hybrid_docs = self.hybrid_retriever.retrieve(
-            query=normalized_query
+            query=query
         )
 
         reRanker_docs = Reranker(model=reRanker_model).rerank(
