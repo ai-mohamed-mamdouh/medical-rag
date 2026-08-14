@@ -13,7 +13,7 @@ Reranker
   ↓
 Threshold
   ↓
-Context Expansion
+Context Expansion #
   ↓
 Best list[Document]
 ```

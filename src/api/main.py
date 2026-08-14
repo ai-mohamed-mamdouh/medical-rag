@@ -1,5 +1,7 @@
 from contextlib import asynccontextmanager
 import logging
+import warnings
+warnings.filterwarnings("ignore")
 
 from fastapi import FastAPI
 

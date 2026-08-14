@@ -35,6 +35,9 @@ class Retriever:
             if doc.metadata['rerank_score'] > threshold :
                 relevant_docs.append(doc)
 
+        if len(relevant_docs) == 0 :
+            relevant_docs.append(None)
+            
         return relevant_docs
         
     def retrieval_pipeline(self, query: Query, reRanker_model ) -> list[Document]:
@@ -52,44 +55,3 @@ class Retriever:
         relevant_docs = self.threshold(reRanker_docs)
 
         return relevant_docs
-
-
-
-
-
-from src.retrieval.query import Query
-from src.retrieval.retriever import Retriever
-from src.document_processing.embeddings import Embedding
-from src.document_processing.vector_store import VectorStore
-
-if __name__ == "__main__":
-
-    vector_store = VectorStore(
-        Embedding().get_embedding_model()
-    )
-
-    retriever = Retriever(
-        vector_store=vector_store
-    )
-
-    query = Query(
-        original_query=(
-            "What are the common peripheral and central causes of vertigo and dizziness?"
-        ),
-        normalized_query=(
-            "What are the common peripheral and central causes of vertigo and dizziness?"
-        )
-    )
-
-    reRanker_model=RerankerModel().get_reranker_model()
-
-    docs = retriever.retrieval_pipeline(
-        query=query,
-        reRanker_model=reRanker_model
-    )
-
-    for i, doc in enumerate(docs, start=1):
-        print(f"Rank: {i}")
-        print(doc.page_content)
-        print(doc.metadata)
-        print("=" * 50)

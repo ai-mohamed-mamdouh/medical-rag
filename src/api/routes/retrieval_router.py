@@ -1,10 +1,9 @@
 from typing import Any
-
-from fastapi import APIRouter, Request, status
-from pydantic import BaseModel, Field
-
 from src.retrieval.query import Query
-from src.retrieval.retriever import Retriever
+from pydantic import BaseModel, Field
+from src.retrieval import Retriever
+from fastapi import APIRouter, Request, status
+
 
 retrieval_router = APIRouter(
     prefix="/retrieval",
