@@ -27,6 +27,16 @@ class Retriever:
             top_k=settings.TOP_K
         )
 
+    def threshold(self, documents : list[Document]) :
+        threshold = settings.RELEVANCE_THRESHOLD
+
+        relevant_docs = []
+        for doc in documents:
+            if doc.metadata['rerank_score'] > threshold :
+                relevant_docs.append(doc)
+
+        return relevant_docs
+        
     def retrieval_pipeline(self, query: Query, reRanker_model ) -> list[Document]:
 
         normalized_query = query.normalized_query
@@ -39,8 +49,10 @@ class Retriever:
             query=query,
             documents=hybrid_docs
             )
+        
+        relevant_docs = self.threshold(reRanker_docs)
 
-        return reRanker_docs
+        return relevant_docs
 
 
 
@@ -71,7 +83,7 @@ if __name__ == "__main__":
     )
 
     reRanker_model=RerankerModel().get_reranker_model()
-    
+
     docs = retriever.retrieval_pipeline(
         query=query,
         reRanker_model=reRanker_model

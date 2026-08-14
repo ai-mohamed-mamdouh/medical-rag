@@ -24,4 +24,5 @@ class Settings:
     RRF_K=60
     RERANKER_MODEL_NAME = "cross-encoder/ms-marco-MiniLM-L2-v2"  # "cross-encoder/ms-marco-MiniLM-L6-v2"
 
+    RELEVANCE_THRESHOLD=0.8
 settings = Settings()
