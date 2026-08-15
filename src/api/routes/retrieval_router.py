@@ -1,5 +1,5 @@
 from typing import Any
-from src.retrieval.query import Query
+from src.retrieval.query.query import Query
 from pydantic import BaseModel, Field
 from src.retrieval import Retriever
 from fastapi import APIRouter, Request, status

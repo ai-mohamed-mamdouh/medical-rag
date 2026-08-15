@@ -1,7 +1,7 @@
 from langchain_core.documents import Document
 from src.retrieval.retrievers.rrf_fusion import RRFFusion
 from src.config.settings import settings
-from src.retrieval.query import Query
+from src.retrieval.query.query import Query
 
 
 class HybridRetriever:

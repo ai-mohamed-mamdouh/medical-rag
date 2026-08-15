@@ -1,5 +1,5 @@
 import torch
-from src.retrieval.query import Query
+from src.retrieval.query.query import Query
 from src.config.settings import settings
 from langchain_core.documents import Document
 from sentence_transformers import CrossEncoder

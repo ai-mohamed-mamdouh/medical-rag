@@ -1,4 +1,4 @@
-from src.retrieval.query import Query, QueryProcessor
+from src.retrieval.query.query import Query, QueryProcessor
 from src.config.settings import settings
 from langchain_core.documents import Document
 from src.document_processing.vector_store import VectorStore
